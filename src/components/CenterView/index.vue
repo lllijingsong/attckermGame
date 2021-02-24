@@ -1,7 +1,16 @@
 <template>
   <div class="view-box">
     <div class="view-board-box">
-      <div ref="moveBox" class="move-box"></div>
+      <ul>
+        <li v-for="item in borderList" :key="item.id" :class="[item.className, item.form === 'circle'? 'circle' : 'square' ]">{{ item.id }}</li>
+      </ul>
+      <!-- <div>
+        <img class="border-item" src="../../assets/border1.png" alt="">
+        <ul>
+          <li ></li>
+        </ul>
+        <div ref="moveBox" class="move-box"></div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -11,7 +20,8 @@ export default {
   data() {
     return {
       x: 213,
-      y: 40
+      y: 40,
+      borderList: []
     };
   },
   mounted() {
@@ -25,13 +35,42 @@ export default {
         this.$refs.moveBox.style.top = this.y + 'px';
       }
     })
+    this.borderInit()
     // this.$refs.moveBox.style.left // 351px; 138
   },
   methods: {
     pockerChanged () {
 
+    },
+    borderInit() {
+      let arr = []
+      for(let i = 1; i <= 42; i++) {
+        let obj = {}
+        if (i % 7 === 0) {
+          obj = {
+            id: i,
+            name: i + '-border',
+            className: 'border-item',
+            form: 'square'
+          }
+        } else {
+          obj = {
+            id: i,
+            name: i + '-border',
+            className: 'border-item',
+            form: 'circle'
+          }
+        }
+        arr.push(obj)
+      }
+      this.borderList = arr
     }
   },
+  // computed: {
+  //   borderInit() {
+  //     return 
+  //   }
+  // }
 };
 </script>
 <style lang="less" scoped>
@@ -49,9 +88,30 @@ export default {
     width: 100%;
     height: 100%;
     padding: 5px;
-    background: url("../../assets/border1.png") no-repeat 50% 50%;
-    background-size: 70% 90%;
+    display: flex;
+    overflow: hidden;
     position: relative;
+    box-sizing: border-box;
+    ul {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .border-item {
+        width: 50px;
+        height: 50px;
+        // background-color: pink;
+      }
+      .circle {
+        border: 1px solid #fff;
+        border-radius: 50%;
+      }
+      .square {
+        border: 1px solid #fff;
+        border-radius: 3px;
+      }
+    }
     .move-box {
       width: 65px;
       height: 50px;
