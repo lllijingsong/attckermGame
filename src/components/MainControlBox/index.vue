@@ -69,7 +69,6 @@ export default {
         { name: "4", id: '1', desciprtion: 'balabalabala' },
         { name: "5", id: '1', desciprtion: 'balabalabala' },
         { name: "7", id: '1', desciprtion: 'balabalabala' },
-        { name: "8", id: '1', desciprtion: 'balabalabala' },
       ],
     };
   },
