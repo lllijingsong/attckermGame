@@ -93,9 +93,10 @@ export default {
     handleLoginClick() {
       localStorage.setItem('userName', this.userForm.name)
       localStorage.setItem('identity', this.selectDiff)
-
       let name = localStorage.getItem('userName')
       let ident = localStorage.getItem('identity')
+      this.$store.dispatch('setUser', { name: name, identity: ident})
+
       switch (ident) {
         case '攻击者':
           if (name && this.userForm.password !== '') this.$router.push({ path: "/Attacker" })

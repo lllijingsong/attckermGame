@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from '@/store'
 Vue.use(VueRouter)
 
 const routes = [
@@ -33,6 +33,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // console.log(store.state.app.user)
   if (to.name === null) next({ path: '/404' })
   if (to.name === 'Attacker') {
     let name = localStorage.getItem('identity')

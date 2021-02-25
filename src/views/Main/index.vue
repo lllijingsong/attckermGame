@@ -34,7 +34,6 @@ export default {
   methods: {
     handleClick() {
       test().then((res) => {
-        console.log(res);
       });
     },
   },
