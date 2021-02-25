@@ -2,7 +2,7 @@
   <div class="view-box">
     <div class="view-board-box">
       <ul>
-        <li v-for="item in borderList" :key="item.id" :class="[item.className, item.form === 'circle'? 'circle' : 'square']">
+        <li v-for="item in borderList" :key="item.id" :class="[item.className, item.form === 'circle'? 'circle' : 'square', borderId === item.id ? 'border-item-active' : '']">
           <transition name="el-fade-in-linear">
             <div v-show="borderId === item.id" :class="[borderId === item.id ? 'borderActive' : '']"></div>
           </transition>
@@ -105,10 +105,10 @@ export default {
         color: #fff;
         margin: 10px;
         display: flex;
-        // justify-content: center;
-        // align-items: center;
         overflow: hidden;
-        // background-color: pink;
+      }
+      .border-item-active {
+        box-shadow: 2px 2px 14px #fbad80;
       }
       .circle {
         border: 1px dashed #fff;
@@ -119,17 +119,6 @@ export default {
         border-radius: 3px;
       }
     }
-    .move-box {
-      width: 65px;
-      height: 50px;
-      background: url('../../assets/User.png') no-repeat;
-      background-size: 100% 90%;
-      position: absolute;
-      left: 213px;
-      z-index: 1111;
-      top: 40px;
-      transition: all 0.5s linear;
-    }
   }
 }
 </style>
@@ -139,7 +128,7 @@ export default {
       height: 60px;
       /* animation: borderAnimation 2s linear infinite; */
       transform-origin: bottom center;
-      border: 1px solid #fff;
+      /* border: 1px solid #fff; */
       background-color: #fff;
       background: url('../../assets/soldier.png');
       background-repeat: no-repeat;
