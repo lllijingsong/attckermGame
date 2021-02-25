@@ -3,7 +3,9 @@
     <div class="view-board-box">
       <ul>
         <li v-for="item in borderList" :key="item.id" :class="[item.className, item.form === 'circle'? 'circle' : 'square']">
-          <div :class="[borderId === item.id ? 'borderActive' : '']"></div>
+          <transition name="el-fade-in-linear">
+            <div v-show="borderId === item.id" :class="[borderId === item.id ? 'borderActive' : '']"></div>
+          </transition>
         </li>
       </ul>
     </div>
@@ -135,10 +137,13 @@ export default {
     .borderActive {
       width: 60px;
       height: 60px;
-      animation: borderAnimation 1.5s linear infinite;
+      /* animation: borderAnimation 2s linear infinite; */
       transform-origin: bottom center;
       border: 1px solid #fff;
-      /* background: url('https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2439927042,2745230643&fm=26&gp=0.jpg'); */
+      background-color: #fff;
+      background: url('../../assets/soldier.png');
+      background-repeat: no-repeat;
+      background-size: 100%;
       /*
         transform-origin: bottom center;
         border: 1px solid #fff;
