@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from '@/store'
 Vue.use(VueRouter)
 
 const routes = [
@@ -10,14 +10,19 @@ const routes = [
     component: () => import('@/views/Login')
   },
   {
-    path: '/Home',
-    name: 'Home',
+    path: '/Attacker',
+    name: 'Attacker',
     component: () => import('@/views/Main')
   },
   {
-    path: '/SelectDiff',
-    name: 'selectDiff',
-    component: () => import('@/views/SelectDiff')
+    path: '/Defense',
+    name: 'Defense',
+    component: () => import('@/views/Defense')
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/404')
   }
 ]
 
@@ -27,5 +32,21 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  // console.log(store.state.app.user)
+  if (to.name === null) next({ path: '/404' })
+  if (to.name === 'Attacker') {
+    let name = localStorage.getItem('identity')
+    if (name === '攻击者') next()
+    else next({ path: '/404' })
+  } else if (to.name === 'Defense') {
+    let name = localStorage.getItem('identity')
+    if (name === '防御者') next()
+    else next({ path: '/404' })
+  } else {
+    next()
+  }
+  console.log(to)
+})
 
 export default router
