@@ -12,27 +12,24 @@
   </div>
 </template>
 <script>
+/**
+ *  棋盘格子组件；
+ */
 import Bus from '@/utils/Bus'
 export default {
+  props: {
+
+  },
   data() {
     return {
-      x: 213,
-      y: 40,
       borderList: [],
       borderId: 1,
     };
   },
   mounted() {
     Bus.$on('pockerHandleClick', e => {
-      this.borderId += 1
-      // this.x += 138;
-      // this.$refs.moveBox.style.left = this.x + 'px';
-      // if (this.x > 1041) {
-      //   this.x = 213;
-      //   this.y += 110
-      //   this.$refs.moveBox.style.left = this.x + 'px';
-      //   this.$refs.moveBox.style.top = this.y + 'px';
-      // }
+      if (this.borderId > 42 || this.borderId === 42 || (this.borderId + e.move) > 42) this.borderId = 42
+      else this.borderId += e.move
     })
     this.borderInit()
     // this.$refs.moveBox.style.left // 351px; 138

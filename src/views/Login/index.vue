@@ -54,6 +54,7 @@
             <el-radio-button label="困难"></el-radio-button> -->
             <el-radio-button label="攻击者"></el-radio-button>
             <el-radio-button label="防御者"></el-radio-button>
+            <el-radio-button label="观众"></el-radio-button>
           </el-radio-group>
           </el-form-item>
         </div>
@@ -83,27 +84,24 @@ export default {
       selectDiff: '攻击者'
     };
   },
-  // mounted() {
-  //   setInterval(() => {
-  //     if (this.backgroundImgNum === 3) this.backgroundImgNum = 1;
-  //     else this.backgroundImgNum += 1;
-  //   }, 2000);
-  // },
   methods: {
     handleLoginClick() {
       localStorage.setItem('userName', this.userForm.name)
       localStorage.setItem('identity', this.selectDiff)
       let name = localStorage.getItem('userName')
       let ident = localStorage.getItem('identity')
-      this.$store.dispatch('setUser', { name: name, identity: ident})
+
+      this.$store.dispatch('setUser', { name: name, identity: ident, img: ident === '攻击者' ? 'heker.jpg' : 'honker.jpg' })
 
       switch (ident) {
         case '攻击者':
           if (name && this.userForm.password !== '') this.$router.push({ path: "/Attacker" })
           return
         case '防御者':
-          if (name && this.userForm.password !== '') this.$router.push({ path: "/Defense" })
+          if (name && this.userForm.password !== '') this.$router.push({ path: "/Attacker" })
           return
+        case '观众':
+
       }
       this.$message.error('登录失败, 请重试...')
     },

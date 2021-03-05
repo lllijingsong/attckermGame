@@ -11,6 +11,7 @@ const app = {
         user: {
             name: '',
             identity: '',
+            img: '',
         }
 
     },

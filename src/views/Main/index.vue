@@ -3,7 +3,7 @@
     <div class="main-box-top">
       <CenterView></CenterView>
       <div class="main-top-right">
-        <UserViews></UserViews>
+        <UserViews :otherUserInfo="otherUserInfo"></UserViews>
         <div class="user-integral">
           <div>耗损： 100</div>
           <div>剩余卡牌： 10</div>
@@ -12,12 +12,12 @@
       </div>
     </div>
     <div class="footer-box">
-      <MainControlBox></MainControlBox>
+      <MainControlBox :userInfo="userInfo"></MainControlBox>
     </div>
   </div>
 </template>
 <script>
-import { test } from "@/api";
+// import deepClone from '@/utils'
 import MainControlBox from "@/components/MainControlBox";
 import UserViews from "@/components/UserViews";
 import CenterView from "@/components/CenterView";
@@ -29,7 +29,10 @@ export default {
     CenterView,
   },
   data() {
-    return {};
+    return {
+      userInfo: {},
+      otherUserInfo: {},
+    };
   },
   methods: {
     handleClick() {
@@ -37,6 +40,18 @@ export default {
       });
     },
   },
+  created() {
+    let identity = localStorage.getItem('identity')
+    this.userInfo = identity === '攻击者' ?  { identity:"攻击者", img:"heker.jpg", name:"admin" } : { identity: '防御方', img: 'honker.jpg', name: 'admin' }
+    this.otherUserInfo = identity !== '攻击者' ? { identity:"攻击者", img:"heker.jpg", name:"admin" } : { identity: '防御方', img: 'honker.jpg', name: 'admin' }
+    // if (identity === '攻击者') {
+    //   this.userInfo =  { identity:"攻击者", img:"heker.jpg", name:"admin" }
+    //   this.otherUserInfo = { identity: '防御方', img: 'honker.jpg', name: 'admin' }
+    // } else {
+    //   this.userInfo = { identity: '防御方', img: 'honker.jpg', name: 'admin' }
+    //   this.otherUserInfo = { identity:"攻击者", img:"heker.jpg", name:"admin" }
+    // }
+  }
 };
 </script>
 <style scoped lang="less">

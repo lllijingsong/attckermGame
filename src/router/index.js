@@ -35,18 +35,18 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // console.log(store.state.app.user)
   if (to.name === null) next({ path: '/404' })
-  if (to.name === 'Attacker') {
-    let name = localStorage.getItem('identity')
-    if (name === '攻击者') next()
-    else next({ path: '/404' })
-  } else if (to.name === 'Defense') {
-    let name = localStorage.getItem('identity')
-    if (name === '防御者') next()
-    else next({ path: '/404' })
-  } else {
+  // if (to.name === 'Attacker') {
+  //   let name = localStorage.getItem('identity')
+  //   if (name === '攻击者') next()
+  //   else next({ path: '/404' })
+  // } else if (to.name === 'Defense') {
+  //   let name = localStorage.getItem('identity')
+  //   if (name === '防御者') next()
+  //   else next({ path: '/404' })
+  // } 
+  else {
     next()
   }
-  console.log(to)
 })
 
 export default router

@@ -1,6 +1,8 @@
 <template>
   <div id="app" class="scrollbar">
-    <router-view />
+    <!-- <transition name="el-fade-in-linear"> -->
+      <router-view />
+    <!-- </transition> -->
   </div>
 </template>
 <style scoped lang="less">
