@@ -43,17 +43,17 @@ const path = require('path')
 			https: false,
 			hotOnly: false,
 			/* 使用代理 */
-			proxy: {
-				'/api': {
-					target: 'http://localhost:8888', //后端地址
-					secure: false,  // 如果是https接口，需要配置这个参数
-					ws: true,//是否代理websockets
-					changeOrigin: true,
-					pathRewrite: {
-						'^/api': ''
-					}
-				}
-			}
+			// proxy: {
+			// 	'/api': {
+			// 		target: 'http://localhost:3000', //后端地址
+			// 		secure: false,  // 如果是https接口，需要配置这个参数
+			// 		ws: true,//是否代理websockets
+			// 		changeOrigin: true,
+			// 		pathRewrite: {
+			// 			'^/api': ''
+			// 		}
+			// 	}
+			// }
 		},
 
         pluginOptions: {

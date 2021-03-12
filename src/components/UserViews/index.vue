@@ -5,10 +5,26 @@
       </div>
       <div class="other-user-name">{{ otherUserInfo.identity }}</div>
       <div class="user-control-box">
-        <div><i class="el-icon-menu"></i></div>
-        <div><i class="el-icon-s-finance"></i></div>
-        <div><i class="el-icon-s-opportunity"></i></div>
-        <div><i class="el-icon-s-custom"></i></div>
+        <div>
+          <el-tooltip effect="dark" content="菜单" placement="top">
+            <i class="el-icon-menu"></i>
+          </el-tooltip>
+        </div>
+        <div>
+          <el-tooltip effect="dark" content="菜单" placement="top">
+            <i class="el-icon-s-finance"></i>
+          </el-tooltip>
+        </div>
+        <div>
+          <el-tooltip effect="dark" content="菜单" placement="top">
+            <i class="el-icon-s-opportunity"></i>
+          </el-tooltip>
+        </div>
+        <div>
+          <el-tooltip effect="dark" content="菜单" placement="top">
+            <i class="el-icon-s-custom"></i>
+          </el-tooltip>
+        </div>
       </div>
   </div>
 </template>
@@ -34,7 +50,7 @@ export default {
 <style scoped lang="less">
   .other-user-views {
     width: 100%;
-    height: 40%;
+    height: 30%;
     background-color: @mainColor;
     box-sizing: border-box;
     padding: 5px;
@@ -62,10 +78,16 @@ export default {
       display: flex;
       justify-content: space-between;
       color: @mainFontColor;
+      box-sizing: border-box;
       div {
         padding: 6px;
         cursor: pointer;
         font-size: 18px;
+        box-sizing: border-box;
+        i:hover {
+          // border: 1px solid yellow;
+          color: red;
+        }
       }
     }
   }

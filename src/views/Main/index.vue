@@ -5,18 +5,32 @@
       <div class="main-top-right">
         <UserViews :otherUserInfo="otherUserInfo"></UserViews>
         <div class="user-integral">
-          <div>耗损： 100</div>
-          <div>剩余卡牌： 10</div>
-          <div>当前进度： 10</div>
+          <div style="color: red">历史金额： {{ record.before }}</div>
+          <div style="color: red">当前金额： {{ record.money }}</div>
+          <div style="color: red">剩余卡牌： {{ record.poker }}</div>
+        </div>
+        <hr/>
+        <div class="user-cate-cover">
+          <div class="user-cate">
+            <div class="cate-title">阶段详情</div>
+            <div class="cate-items">阶段一：Recon (侦察)</div>
+            <div class="cate-items">阶段二：Weaponization:  (武器化)</div>
+            <div class="cate-items">阶段三：Delivery:  (投送)</div>
+            <div class="cate-items">阶段四：Exploit:  (利用)</div>
+            <div class="cate-items">阶段五：Install:  (安装)</div>
+            <div class="cate-items">阶段六：C2:  (指控)</div>
+            <div class="cate-items">阶段七：Actions:  (目标)</div>
+          </div>
         </div>
       </div>
     </div>
     <div class="footer-box">
-      <MainControlBox :userInfo="userInfo"></MainControlBox>
+      <MainControlBox :userInfo="userInfo" @message="message"></MainControlBox>
     </div>
   </div>
 </template>
 <script>
+
 // import deepClone from '@/utils'
 import MainControlBox from "@/components/MainControlBox";
 import UserViews from "@/components/UserViews";
@@ -32,13 +46,22 @@ export default {
     return {
       userInfo: {},
       otherUserInfo: {},
+      record: {
+        before: 0,
+        money: 0,
+        poker: 0,
+      }
     };
   },
   methods: {
     handleClick() {
-      test().then((res) => {
-      });
+      // test().then((res) => {
+      // });
     },
+    message(data) {
+      // console.log(data, 'xxxx')
+      this.record = data.record
+    }
   },
   created() {
     let identity = localStorage.getItem('identity')
@@ -50,6 +73,16 @@ export default {
     // } else {
     //   this.userInfo = { identity: '防御方', img: 'honker.jpg', name: 'admin' }
     //   this.otherUserInfo = { identity:"攻击者", img:"heker.jpg", name:"admin" }
+    // }
+  },
+  mounted() {
+    // let socket = new WebSocket(`ws://localhost:3000/ws`)
+    // socket.onopen = e => {
+    //   console.log(e)
+    //   socket.send('123')
+    // }
+    // socket.onmessage = e => {
+    //   console.log(e)
     // }
   }
 };
@@ -71,8 +104,23 @@ export default {
       .user-integral {
         width: 100%;
         box-sizing: border-box;
-        padding: 5px;
+        padding: 10px;
         color: @mainFontColor;
+      }
+      .user-cate {
+        box-sizing: border-box;
+        padding: 10px;
+        color: @mainFontColor;
+        height: 250px;
+        overflow: auto;
+        .cate-title {
+          font-size: 16px;
+          font-weight: 700;
+          padding: 5px 0px;
+        }
+        .cate-items {
+          padding: 5px 0px 5px;
+        }
       }
     }
   }
@@ -81,5 +129,25 @@ export default {
     width: 100%;
     height: 25%;
   }
+}
+.user-cate::-webkit-scrollbar {
+  // display: none;
+}
+.user-cate::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width : 10px;  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+.user-cate::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background   : #535353;
+}
+.user-cate::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background   : #ededed;
 }
 </style>
