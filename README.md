@@ -38,3 +38,37 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 
+# Act on Objectives
+
+### 攻击组， 攻击人的代表
+    随机选择；
+    State Actor	Criminal (org)
+    Criminal (freelance)
+    Political/Social
+    PIA (Scriptkiddies)
+    Hactivists
+    Spy - Freelance	
+    Spy - Corp	
+    Warfighters
+
+
+    Actors Score []对应初始金钱余额；
+
+
+### 随机目标
+    随机产生， 需要根据
+    Exfil
+    Destroy
+    Humiliate
+    Foothold/Pivot
+    Defacement
+    Plant Info (False Data)
+    Denial of Service
+    Data Disclosure
+    Shared Space
+    Blackmail
+    Ransomware
+
+# All Cards
+
+

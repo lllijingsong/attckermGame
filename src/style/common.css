@@ -24,6 +24,10 @@ img {
   padding: 0;
 }
 
+hr {
+  margin: 0;
+}
+
 fieldset,
 img,
 input,
@@ -74,7 +78,7 @@ table {
 }
 
 body {
-  font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+  font: 12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif;
   color: #303133;
   background: #fff
 }

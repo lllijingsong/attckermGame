@@ -15,7 +15,7 @@
             <el-button size="mini" @click="handleLoginClick" style="width: 100%;">Login</el-button>
         </div> -->
     <div class="login-form">
-        <img src="../../assets/logo.png" class="form-logo">
+        <img src="../../assets/logo.png" class="form-logo"  draggable="false" >
         <p>网络杀伤链兵棋系统</p>
       <el-form ref="userForm" :model="userForm" :rules="rules">
         <div class="form-input">
@@ -49,9 +49,12 @@
         <div class="form-input">
           <el-form-item>
             <el-radio-group class="select-radio" size="mini" v-model="selectDiff">
-            <el-radio-button label="简单"></el-radio-button>
+            <!-- <el-radio-button label="简单"></el-radio-button>
             <el-radio-button label="中等"></el-radio-button>
-            <el-radio-button label="困难"></el-radio-button>
+            <el-radio-button label="困难"></el-radio-button> -->
+            <el-radio-button label="攻击者"></el-radio-button>
+            <el-radio-button label="防御者"></el-radio-button>
+            <el-radio-button label="观众"></el-radio-button>
           </el-radio-group>
           </el-form-item>
         </div>
@@ -78,22 +81,29 @@ export default {
         name: [{ required: true, message: '手机号都没有！', trigger: 'blur' }],
         password: [{ required: true, message: '密码呢！', trigger: 'blur' }]
       },
-      selectDiff: '简单'
+      selectDiff: '攻击者'
     };
   },
-  // mounted() {
-  //   setInterval(() => {
-  //     if (this.backgroundImgNum === 3) this.backgroundImgNum = 1;
-  //     else this.backgroundImgNum += 1;
-  //   }, 2000);
-  // },
   methods: {
     handleLoginClick() {
       localStorage.setItem('userName', this.userForm.name)
+      localStorage.setItem('identity', this.selectDiff)
       let name = localStorage.getItem('userName')
-      if (name && this.userForm.password !== '') this.$router.push({ path: "/Home" })
-        else this.$message.error('登录失败, 请重试...')
-      // this.$router.push({ path: "/Home" });
+      let ident = localStorage.getItem('identity')
+
+      this.$store.dispatch('setUser', { name: name, identity: ident, img: ident === '攻击者' ? 'heker.jpg' : 'honker.jpg' })
+
+      switch (ident) {
+        case '攻击者':
+          if (name && this.userForm.password !== '') this.$router.push({ path: "/Attacker" })
+          return
+        case '防御者':
+          if (name && this.userForm.password !== '') this.$router.push({ path: "/Attacker" })
+          return
+        case '观众':
+
+      }
+      this.$message.error('登录失败, 请重试...')
     },
   },
 };
@@ -102,9 +112,9 @@ export default {
 .backgroundImg {
   width: 100%;
   height: 100vh;
-  background: url("https://cdn.pixabay.com/photo/2019/03/08/21/13/record-4043223_1280.jpg")
+  background: url("../../assets/worldBackground.jpg")
     no-repeat;
-  background-size: 110% 100%;
+  background-size: 100% 100%;
   display: flex;
   justify-content: center;
   /* align-items: center; */
@@ -113,15 +123,16 @@ export default {
     width: 350px;
     height: 450px;
     border-radius: 5px;
-    border: 1px solid #fff;
+    // border: 1px solid #fff;
+    box-shadow: 1px 1px 5px #fff;
     margin: 10em auto;
     position: relative;
     overflow: hidden;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     p {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
     }
 }
