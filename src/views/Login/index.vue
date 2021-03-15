@@ -15,7 +15,7 @@
             <el-button size="mini" @click="handleLoginClick" style="width: 100%;">Login</el-button>
         </div> -->
     <div class="login-form">
-        <img src="../../assets/logo.png" class="form-logo">
+        <img src="../../assets/logo.png" class="form-logo"  draggable="false" >
         <p>网络杀伤链兵棋系统</p>
       <el-form ref="userForm" :model="userForm" :rules="rules">
         <div class="form-input">
@@ -112,9 +112,9 @@ export default {
 .backgroundImg {
   width: 100%;
   height: 100vh;
-  background: url("https://cdn.pixabay.com/photo/2019/03/08/21/13/record-4043223_1280.jpg")
+  background: url("../../assets/worldBackground.jpg")
     no-repeat;
-  background-size: 110% 100%;
+  background-size: 100% 100%;
   display: flex;
   justify-content: center;
   /* align-items: center; */
@@ -123,15 +123,16 @@ export default {
     width: 350px;
     height: 450px;
     border-radius: 5px;
-    border: 1px solid #fff;
+    // border: 1px solid #fff;
+    box-shadow: 1px 1px 5px #fff;
     margin: 10em auto;
     position: relative;
     overflow: hidden;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     p {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
     }
 }

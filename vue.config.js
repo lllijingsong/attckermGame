@@ -56,12 +56,12 @@ const path = require('path')
 			// }
 		},
 
-        pluginOptions: {
-          'style-resources-loader': {
-            preProcessor: 'less',
-            patterns: [
-              path.resolve(__dirname, './src/styles/index.less')
-            ]
-          }
-        }
-    }
+    pluginOptions: {
+      'style-resources-loader': {
+        preProcessor: 'less',
+        patterns: [
+          path.resolve(__dirname, './src/styles/index.less')
+        ]
+      }
+    },
+  }

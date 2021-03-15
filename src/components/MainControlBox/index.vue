@@ -15,11 +15,13 @@
           <li @click="pockerHandleClick(item, i)" v-for="(item, i) in pockerList" :key="i" :class="[ i === pokerInd ? 'li-active' : '' ]">
             <div>
               <h6>{{ item.id }}</h6>
-              <span>cost: {{ item.cost }}</span>
-              <span>move: {{ item.moves.move }}</span>
-              <span>moveRound: {{ item.moves.moveRound }}</span>
-              <span>categories: {{ item.categories }}</span>
-              <p>desciprtion: {{ item.description }}</p>
+              <span>代价: {{ item.cost }}</span>
+              <span>移动步数: {{ item.moves.move }}</span>
+              <!-- <span>moveRound: {{ item.moves.moveRound }}</span> -->
+              <span>适用阶段: {{ item.categories || [] }}</span>
+              <span class="items-description">
+                描述信息：{{ item.description }}
+              </span>
             </div>
           </li>
       </ul>
@@ -95,7 +97,7 @@ export default {
 
   mounted() {
     let name = localStorage.getItem('identity')
-    this.socket = new WebSocket(`ws://localhost:3000/ws`)
+    this.socket = new WebSocket(`ws://172.20.10.4:3000/ws`)
     this.socket.onopen = e => {
       this.socket.send(JSON.stringify({ api: 'setId', id: name === '攻击者' ? 'at' : 'dt' }))
     }
@@ -248,34 +250,42 @@ export default {
     }
     ul > li {
       height: 100%;
-      width: 150px;
+      width: 160px;
       border: 1px solid @mainBorder;
       border-radius: 5px;
       margin: 0 2px;
       cursor: pointer;
-      background-color: #79b8ff;
-      box-shadow: 1px 1px 10px #79b8ff;
+      background-color: #0e1711;
+      box-shadow: 2px 2px 15px #595d5f;
       transition: all 0.5s;
       overflow: hidden;
       position: relative;
+      padding: 5px;
+      box-sizing: border-box;
+      color: #fff;
       div {
         width: 100%;
         height: 100%;
-        // padding: 10px;
         h6 {
           text-align: center;
+          font-weight: 700;
+          font-size: 16px;
         }
         span {
           display: block;
+          padding: 2px 0px;
         }
         p {
           display: block;
+        }
+        .items-description {
+          // border: 1px solid #000;
         }
       }
     }
     ul > li:hover {
       transform: translateY(-20px);
-      color: #fff;
+      // color: #fff;
       // animation: remvoePoker 0.5s linear;
     }
     .li-remove {
