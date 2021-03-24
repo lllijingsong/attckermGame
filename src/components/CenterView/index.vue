@@ -10,8 +10,9 @@
             item.form ? item.form : 'trigon',
             borderId === item.id ? 'border-item-active' : '',
           ]"
-        > 
-        <!-- <span>{{ item.id }}</span> -->
+          :style="{ boxShadow: '1px 1px 5px' + item.bgc }"
+        >
+        <span v-show="borderId !== item.id">{{ item.cate || '' }}</span>
           <div class="arrows-item" v-if="item.arrows"></div>
           <transition name="el-fade-in-linear">
               <div
@@ -70,6 +71,16 @@ export default {
         "C2",
         "Actions",
       ];
+      const colorList = [
+        '#FFCC99',
+        '#FFFF99',
+        '#99CC99',
+        '#CCFF99',
+        '#99CCFF',
+        '#FF9966',
+        '#CCCC33',
+      ]
+      
       let index = 0;
       for (let i = 1; i <= length; i++) {
         let obj = {
@@ -77,16 +88,18 @@ export default {
           categories: categories[index],
           name: i + "-border",
           className: "border-item"
-
         }
 
         if (include.includes(i)) {
           obj['form'] = "square"
+          obj['cate'] = categories[include.indexOf(i)];
         } else if (i === length) {
           obj['form'] = ''
         } else {
           obj['form'] = "circle"
+          obj['bgc'] = colorList[index]
         }
+
         if (i % 7 === 0) {
           index += 1;
         }
@@ -186,7 +199,7 @@ export default {
       }
       .circle {
         // border: 1px dashed #fff;
-        box-shadow: 1px 1px 5px #fff;
+        // box-shadow: 1px 1px 5px #fff;
         border-radius: 50%;
       }
       .square {

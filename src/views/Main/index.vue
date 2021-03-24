@@ -7,19 +7,15 @@
         <div class="user-integral">
           <div style="color: red">历史金额： {{ record.before }}</div>
           <div style="color: red">当前金额： {{ record.money }}</div>
-          <div style="color: red">剩余卡牌： {{ record.poker }}</div>
+          <!-- <div style="color: red">剩余卡牌： {{ record.poker }}</div> -->
         </div>
         <hr/>
         <div class="user-cate-cover">
           <div class="user-cate">
             <div class="cate-title">阶段详情</div>
-            <div class="cate-items">阶段一：Recon (侦察)</div>
-            <div class="cate-items">阶段二：Weaponization:  (武器化)</div>
-            <div class="cate-items">阶段三：Delivery:  (投送)</div>
-            <div class="cate-items">阶段四：Exploit:  (利用)</div>
-            <div class="cate-items">阶段五：Install:  (安装)</div>
-            <div class="cate-items">阶段六：C2:  (指控)</div>
-            <div class="cate-items">阶段七：Actions:  (目标)</div>
+            <template>
+              <div v-for="item in pokerStage" :key="item.id" :class="[ item.id === atStage ? 'cate-active' : '', 'cate-items' ]">{{ item.msg }}</div>
+            </template>
           </div>
         </div>
       </div>
@@ -35,6 +31,7 @@
 import MainControlBox from "@/components/MainControlBox";
 import UserViews from "@/components/UserViews";
 import CenterView from "@/components/CenterView";
+import Bus from '@/utils/Bus'
 export default {
   name: "Home",
   components: {
@@ -50,7 +47,17 @@ export default {
         before: 0,
         money: 0,
         poker: 0,
-      }
+      },
+      pokerStage: [
+        { id: 1, msg: '阶段一：Recon (侦察)' },
+        { id: 2, msg: '阶段二：Weaponization:  (武器化)' },
+        { id: 3, msg: '阶段三：Delivery:  (投送)' },
+        { id: 4, msg: '阶段四：Exploit:  (利用)' },
+        { id: 5, msg: '阶段五：Install:  (安装)' },
+        { id: 6, msg: '阶段六：C2:  (指控)' },
+        { id: 7, msg: '阶段七：Actions:  (目标)' }
+      ],
+      atStage: 1,
     };
   },
   methods: {
@@ -76,6 +83,10 @@ export default {
     // }
   },
   mounted() {
+    Bus.$on('pockerHandleClick', e => {
+      // console.log(e, 'pockerHandleClick')
+      this.atStage = Math.ceil(Number(e) / 7)
+    })
     // let socket = new WebSocket(`ws://localhost:3000/ws`)
     // socket.onopen = e => {
     //   console.log(e)
@@ -120,6 +131,9 @@ export default {
         }
         .cate-items {
           padding: 5px 0px 5px;
+        }
+        .cate-active {
+          color: yellow;
         }
       }
     }

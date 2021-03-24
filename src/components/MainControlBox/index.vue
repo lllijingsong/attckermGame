@@ -92,12 +92,17 @@ export default {
         Actions: { min: 43, max: 49 },
       },
       pointPosition: 1, // 当前点位
+      /**
+       * this property is false mean game continue,  true means gameover ask user would like reset this game?
+       */
+      gameStatus: false,
+      // pokerAni: false, // 点击出牌后，该属性为true 启动出牌动画， 结束后变成false， config: false
     };
   },
 
   mounted() {
     let name = localStorage.getItem('identity')
-    this.socket = new WebSocket(`ws://172.20.10.4:3000/ws`)
+    this.socket = new WebSocket(`ws://localhost:3000/ws`)
     this.socket.onopen = e => {
       this.socket.send(JSON.stringify({ api: 'setId', id: name === '攻击者' ? 'at' : 'dt' }))
     }
@@ -123,6 +128,7 @@ export default {
         } else {
           this.$message({ showClose: true, message: '你输了！！！', type: 'error'})
         }
+        this.gameStatus = true
         return
       } else if (msg.api === 'status') {
         Bus.$emit('controlBoxStatus', msg.status)
@@ -136,6 +142,7 @@ export default {
     Bus.$on('handleClickControl', e => {
       switch (e) {
         case ('play'): // 出牌
+
           this.pokerPlay()
         break;
         case ('pass'): // 跳过
